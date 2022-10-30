@@ -28,7 +28,10 @@ const addBlogPost = (dispatch) => {
       type: "add_blogpost",
       payload: { title, content },
     });
-    callback();
+    // In case callback isn't exist
+    if (callback) {
+      callback();
+    }
   };
 };
 
@@ -39,11 +42,15 @@ const deleteBlogPost = (dispatch) => {
 };
 
 const editBlogPost = (dispatch) => {
-  return (id, title, content) => {
+  return (id, title, content, callback) => {
     dispatch({
       type: "edit_blogpost",
       payload: { id, title, content },
     });
+    // In case callback isn't exist
+    if (callback) {
+      callback();
+    }
   };
 };
 
