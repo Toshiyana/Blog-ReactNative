@@ -16,6 +16,16 @@ const IndexScreen = ({ navigation }) => {
   useEffect(() => {
     // call one time in showing a screen
     getBlogPosts();
+
+    // get blogposts after posting and navigating back to IndexScreen
+    const listener = navigation.addListener("didFocus", () => {
+      getBlogPosts();
+    });
+
+    return () => {
+      // clean up listener to avoid memory leak
+      listener.remove();
+    };
   }, []);
 
   return (
